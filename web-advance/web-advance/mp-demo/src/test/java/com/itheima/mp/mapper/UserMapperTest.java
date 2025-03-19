@@ -100,4 +100,15 @@ class UserMapperTest {
                 .in("id", ids);
         userMapper.update(null, wrapper);
     }
+    @Test
+    void testCustomUpdate() {
+        //1.更新条件
+        List<Long> ids = List.of(11L, 21L, 41L);
+        int amount = 200;
+        //2.定义条件
+        UpdateWrapper<User> wrapper = new UpdateWrapper<User>().in("id", ids);
+//        wrapper.setSql("balance = balance - 200")
+        //3.自定义sql语句
+        userMapper.updateBalanceByIds(wrapper, amount);
+    }
 }
